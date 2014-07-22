@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Shiny App: Predicting Outcomes with MTCars data and a Linear Best-Fit</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Shiny App: Predicting Outcomes with MTCars data and a Linear Best-Fit">
+  <meta name="author" content="Ethan">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="libraries/widgets/bootstrap/css/bootstrap.css"></link>
+<link rel=stylesheet href="libraries/widgets/quiz/css/demo.css"></link>
+<link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Shiny App: Predicting Outcomes with MTCars data and a Linear Best-Fit</h1>
+    <h2>Quick and Easy Data Exploration</h2>
+    <p>Ethan<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Summary of the App</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The App allows for </p>
+
+<ol>
+<li>Visually exploration of all the variables in the MTCars dataset,</li>
+<li>Linear regression is performed on selected pairs of data, and</li>
+<li>Predictions can be performed on user chosen X-values!</li>
+</ol>
+
+<p>The MTCars dataset</p>
+
+<ol>
+<li> Includes 32 automobiles from 1974 Motor Trend US Magazine,</li>
+<li> Includes 11 variables, which are Miles/(US) gallon, Number of cylinders,
+Displacement (cu.in.), Gross horsepower, Rear axle ratio, Weight (lb/1000),
+1/4 mile time, V/S, Transmission type, Number of forward gears,
+Number of carburetors</li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>Example Plot</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Plot MPG versus weight and predict the MPG of the average car that has a weight of 2000 lbs.</p>
+
+<pre><code class="r">library(ggplot2)
+p   &lt;- ggplot(mtcars,aes(x=wt,y=mpg))+geom_point()+xlab(&#39;MPG&#39;)+ylab(&#39;Weight(lb/1000)&#39;)                     
+fit &lt;- lm(mpg~wt,data = mtcars); b&lt;-fit[[1]][1]; m&lt;-fit[[1]][2]
+p   &lt;- p + geom_abline(intercept = b, slope = m ); 
+p + geom_point(data=data.frame(wt=2,mpg=(m*2+b)),aes(x=wt,y=mpg),col=&quot;red&quot;,size=5)
+</code></pre>
+
+<p><img src="assets/fig/unnamed-chunk-1.png" alt="plot of chunk unnamed-chunk-1"> </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Example Plot, continued</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">y.pred &lt;- (m*2+b)
+</code></pre>
+
+<p>The linear fit yields a slope of -5.3 and a y-intercept of 37.3.  The predicted MPG of a car weighing 2000 lbs is 26.6 mpg.  These values get displayed above the plot in the App.  </p>
+
+<p>That&#39;s roughly it.  Its easy to quickly take a look at a lot of different relations.  One should keep in mind </p>
+
+<ul>
+<li>That linear fits should not be extended past the data, and </li>
+<li>This is not a fully representative database of all automobiles.<br></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Review Question</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div class="quiz quiz-single well ">
+  <p>Is this an amazing app and Slidify presentation describing it?</p>
+
+<ol>
+<li> Yes, Absolutely!</li>
+<li> <em>Well its not bad, and its pretty easy to use.</em></li>
+<li> Its terrible, boring and totally unoriginal.</li>
+</ol>
+
+  <button class="quiz-submit btn btn-primary">Submit</button>
+  <button class="quiz-toggle-hint btn btn-info">Show Hint</button>
+  <button class="quiz-show-answer btn btn-success">Show Answer</button>
+  <button class="quiz-clear btn btn-danger">Clear</button>
+  
+  <div class="quiz-hint">
+  <p>Come on, its not terrible.</p>
+
+</div>
+<div class="quiz-explanation">
+  <p>Its not bad, but its not really amazing because it really was kind of easy.  But maybe it was a bit creative for the given the assignment.  </p>
+
+</div>
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Summary of the App'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Example Plot'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Example Plot, continued'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Review Question'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  <script src="libraries/widgets/bootstrap/js/bootstrap.min.js"></script>
+<script src="libraries/widgets/bootstrap/js/bootbox.min.js"></script>
+<script src="libraries/widgets/quiz/js/jquery.quiz.js"></script>
+<script src="libraries/widgets/quiz/js/mustache.min.js"></script>
+<script src="libraries/widgets/quiz/js/quiz-app.js"></script>
+
+  <script>  
+  $(function (){ 
+    $("#example").popover(); 
+    $("[rel='tooltip']").tooltip(); 
+  });  
+  </script>  
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>

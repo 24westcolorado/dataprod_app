@@ -1,0 +1,80 @@
+---
+title       : "Shiny App: Predicting Outcomes with MTCars data and a Linear Best-Fit"
+subtitle    : Quick and Easy Data Exploration
+author      : Ethan
+job         : 
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : [bootstrap, quiz]        # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+---
+
+## Summary of the App
+
+The App allows for 
+
+1. Visually exploration of all the variables in the MTCars dataset,
+2. Linear regression is performed on selected pairs of data, and
+3. Predictions can be performed on user chosen X-values!
+
+The MTCars dataset
+
+1.  Includes 32 automobiles from 1974 Motor Trend US Magazine,
+2.  Includes 11 variables, which are Miles/(US) gallon, Number of cylinders,
+Displacement (cu.in.), Gross horsepower, Rear axle ratio, Weight (lb/1000),
+1/4 mile time, V/S, Transmission type, Number of forward gears,
+Number of carburetors
+
+--- 
+
+## Example Plot
+
+Plot MPG versus weight and predict the MPG of the average car that has a weight of 2000 lbs.
+
+```r
+library(ggplot2)
+p   <- ggplot(mtcars,aes(x=wt,y=mpg))+geom_point()+xlab('MPG')+ylab('Weight(lb/1000)')                     
+fit <- lm(mpg~wt,data = mtcars); b<-fit[[1]][1]; m<-fit[[1]][2]
+p   <- p + geom_abline(intercept = b, slope = m ); 
+p + geom_point(data=data.frame(wt=2,mpg=(m*2+b)),aes(x=wt,y=mpg),col="red",size=5)
+```
+
+![plot of chunk unnamed-chunk-1](assets/fig/unnamed-chunk-1.png) 
+
+--- 
+
+## Example Plot, continued
+
+
+```r
+y.pred <- (m*2+b)
+```
+The linear fit yields a slope of -5.3 and a y-intercept of 37.3.  The predicted MPG of a car weighing 2000 lbs is 26.6 mpg.  These values get displayed above the plot in the App.  
+
+That's roughly it.  Its easy to quickly take a look at a lot of different relations.  One should keep in mind 
+
+* That linear fits should not be extended past the data, and 
+* This is not a fully representative database of all automobiles.  
+
+
+
+--- &radio
+
+## Review Question
+
+Is this an amazing app and Slidify presentation describing it?
+
+1.  Yes, Absolutely!
+2.  _Well its not bad, and its pretty easy to use._
+3.  Its terrible, boring and totally unoriginal.
+
+*** .hint 
+
+Come on, its not terrible.
+
+*** .explanation 
+
+Its not bad, but its not really amazing because it really was kind of easy.  But maybe it was a bit creative for the given the assignment.  
+
